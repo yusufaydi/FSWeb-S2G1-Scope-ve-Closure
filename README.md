@@ -1,0 +1,1 @@
+# FSWeb-S2G1-Scope-ve-Closure
