@@ -1,13 +1,13 @@
 import functions from './index';
 
-const inning = function() {
-    return Math.floor(Math.random() * Math.floor(3));
+const takimSkoru = function() {
+    return Math.floor(Math.random() * 16+10);
   }
   
 
 describe('asFunction', ()=>{
     it('as returns sa', ()=>{
-        expect(functions.foo()).toBe('as');
+        expect(functions.sa()).toBe('as');
     })
 });
 
