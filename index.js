@@ -154,13 +154,13 @@ function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
 
 
 /* Aşağıdaki satırları lütfen değiştirmeyiniz*/
-function as(){
+function sa(){
   console.log('Kodlar çalışıyor');
-  return 'sa';
+  return 'as';
 }
-as();
+sa();
 module.exports = {
-  as,
+  sa,
   ilkiniDon,
   skor1,
   skor2,
