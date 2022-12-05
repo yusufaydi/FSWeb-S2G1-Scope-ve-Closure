@@ -17,9 +17,9 @@ describe('takimSkoru', ()=>{
     })
 });
 
-describe('macSkoru', ()=>{
-    it('maxSkoru returns an object', ()=>{
-        expect(functions.macSkoru(takimSkoru, 4)).toEqual(expect.objectContaining({
+describe('macSonucu', ()=>{
+    it('macSonucu returns an object', ()=>{
+        expect(functions.macSonucu(takimSkoru, 4)).toEqual(expect.objectContaining({
             EvSahibi: expect.any(Number),
             KonukTakim: expect.any(Number),
           }))
