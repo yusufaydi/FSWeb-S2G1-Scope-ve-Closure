@@ -64,15 +64,15 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+    return Math.floor(Math.random()*16) + 10;
 }
 
 
 
 
 /* Görev 3: macSonucu() 
-Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
+Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:w
   1. Görev 2'de oluşturduğunuz 'takimSkoru'nu callback fonskiyonunu olarak ilk parametrede alın
   2. Bir basketbol maçında oynanan çeyrek sayısını ikinci parametre olarak alın
   3. Her çeyrekte EvSahibi ve KonukTakim için bir skor oluşturun
@@ -86,11 +86,22 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(callback,period){
+  let homeTeam = 0;
+  let guestTeam = 0;
+
+  for (let i = 0; i < period; i++) {
+    homeTeam  += callback();
+    guestTeam += callback();
+  }
+
+  return {
+    EvSahibi:homeTeam,
+    KonukTakim:guestTeam
+  };
 }
 
-
+console.log(macSonucu(takimSkoru,4));
 
 
 
@@ -109,11 +120,14 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(callback) {
+  return {
+    EvSahibi: callback(),
+    KonukTakim:callback()
+  };
 
 }
-
+console.log(periyotSkoru(takimSkoru));
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
 Aşağıdaki skorTabelasi() fonksiyonunu kullanarak aşağıdakileri yapınız:
@@ -146,11 +160,43 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function skorTabelasi(periodScore,team,period) {
+   let matchResult = [];
+
+   let home = 0;
+   let guest = 0;
+
+  for (let i = 0; i < period; i++) {
+    let peroidResult = periodScore(team);
+
+    home += peroidResult.EvSahibi;
+    guest += peroidResult.KonukTakim;
+    matchResult.push(
+      `${i+1}. Periyot: Ev Sahibi ${peroidResult.EvSahibi} - Konuk Takım ${peroidResult.KonukTakim} `
+    );
 }
 
+while(home == guest){
+  let counter = 1;
+  let peroidResult = periodScore(team);
 
+  home += peroidResult.EvSahibi;
+  guest += peroidResult.KonukTakim;
+
+
+  matchResult.push(`${counter}. Uzatma: Ev Sahibi ${peroidResult.EvSahibi} - Konuk Takım ${peroidResult.KonukTakim} `);
+  counter++;
+
+}
+
+matchResult.push(`Maç Sonucu: Ev Sahibi ${home} - Konuk Takım ${guest} `);
+
+
+return matchResult;
+
+}
+
+console.log(skorTabelasi(periyotSkoru,takimSkoru,4));
 
 
 /* Aşağıdaki satırları lütfen değiştirmeyiniz*/
